@@ -1,0 +1,21 @@
+import discord
+
+client = discord.Client(intents=discord.Intents.default())
+
+Api_Key = "API HERE"
+game_Name = "Coding"
+
+@client.event
+async def on_ready():
+    print('You have logged in as {0.user}'.format(client))
+    await client.change_presence(activity=discord.Game(game_Name))
+
+@client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
+
+    if client.user.mentioned_in(message):
+        await message.channel.send('****')
+
+client.run(Api_Key)
